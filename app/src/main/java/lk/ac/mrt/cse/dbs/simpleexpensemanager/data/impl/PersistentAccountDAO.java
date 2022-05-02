@@ -49,8 +49,8 @@ public class PersistentAccountDAO implements AccountDAO {
                     cursor.getColumnIndexOrThrow(DBContract.Account.COLUMN_NAME_BANK_NAME));
             String accountHolderName = cursor.getString(
                     cursor.getColumnIndexOrThrow(DBContract.Account.COLUMN_NAME_HOLDER_NAME));
-            double balance = cursor.getDouble(
-                    cursor.getColumnIndexOrThrow(DBContract.Account.COLUMN_NAME_BALANCE));
+            double balance = Double.parseDouble(cursor.getString(
+                    cursor.getColumnIndexOrThrow(DBContract.Account.COLUMN_NAME_BALANCE)));
             accounts.add(new Account(accountNumber, bankName, accountHolderName, balance));
         }
         cursor.close();
@@ -70,8 +70,8 @@ public class PersistentAccountDAO implements AccountDAO {
                     cursor.getColumnIndexOrThrow(DBContract.Account.COLUMN_NAME_BANK_NAME));
             String accountHolderName = cursor.getString(
                     cursor.getColumnIndexOrThrow(DBContract.Account.COLUMN_NAME_HOLDER_NAME));
-            double balance = cursor.getDouble(
-                    cursor.getColumnIndexOrThrow(DBContract.Account.COLUMN_NAME_BALANCE));
+            double balance = Double.parseDouble(cursor.getString(
+                    cursor.getColumnIndexOrThrow(DBContract.Account.COLUMN_NAME_BALANCE)));
             cursor.close();
             return new Account(accountNumber, bankName, accountHolderName, balance);
         }

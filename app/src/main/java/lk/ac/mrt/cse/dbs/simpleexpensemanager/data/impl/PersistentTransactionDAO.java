@@ -46,8 +46,8 @@ public class PersistentTransactionDAO implements TransactionDAO {
                     cursor.getColumnIndexOrThrow(DBContract.Transaction.COLUMN_NAME_ACCOUNT_NO));
             String expenseType = cursor.getString(
                     cursor.getColumnIndexOrThrow(DBContract.Transaction.COLUMN_NAME_EXPENSE_TYPE));
-            double amount = cursor.getDouble(
-                    cursor.getColumnIndexOrThrow(DBContract.Transaction.COLUMN_NAME_AMOUNT));
+            double amount = Double.parseDouble(cursor.getString(
+                    cursor.getColumnIndexOrThrow(DBContract.Transaction.COLUMN_NAME_AMOUNT)));
             transactions.add(new Transaction(new Date(time), accountNo,
                     ExpenseType.valueOf(expenseType), amount));
         }
@@ -68,8 +68,8 @@ public class PersistentTransactionDAO implements TransactionDAO {
                     cursor.getColumnIndexOrThrow(DBContract.Transaction.COLUMN_NAME_ACCOUNT_NO));
             String expenseType = cursor.getString(
                     cursor.getColumnIndexOrThrow(DBContract.Transaction.COLUMN_NAME_EXPENSE_TYPE));
-            double amount = cursor.getDouble(
-                    cursor.getColumnIndexOrThrow(DBContract.Transaction.COLUMN_NAME_AMOUNT));
+            double amount = Double.parseDouble(cursor.getString(
+                    cursor.getColumnIndexOrThrow(DBContract.Transaction.COLUMN_NAME_AMOUNT)));
             transactions.add(new Transaction(new Date(time), accountNo,
                     ExpenseType.valueOf(expenseType), amount));
         }
