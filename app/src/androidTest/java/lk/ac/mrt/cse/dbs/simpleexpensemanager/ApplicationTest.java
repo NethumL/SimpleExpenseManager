@@ -18,7 +18,7 @@ package lk.ac.mrt.cse.dbs.simpleexpensemanager;
 
 import android.content.Context;
 
-import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -37,7 +37,7 @@ public class ApplicationTest {
 
     @BeforeClass
     public static void setUp() {
-        Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        Context context = ApplicationProvider.getApplicationContext();
         assertEquals("lk.ac.mrt.cse.dbs.simpleexpensemanager", context.getPackageName());
         expenseManager = new PersistentExpenseManager(context);
     }
