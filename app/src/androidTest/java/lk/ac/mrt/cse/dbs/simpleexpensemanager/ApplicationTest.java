@@ -16,9 +16,11 @@
 
 package lk.ac.mrt.cse.dbs.simpleexpensemanager;
 
-import android.app.Application;
-import android.test.ApplicationTestCase;
+import android.content.Context;
 
+import androidx.test.platform.app.InstrumentationRegistry;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.control.ExpenseManager;
@@ -26,20 +28,18 @@ import lk.ac.mrt.cse.dbs.simpleexpensemanager.control.PersistentExpenseManager;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.exception.InvalidAccountException;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.ExpenseType;
 
-/**
- * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
- */
-public class ApplicationTest extends ApplicationTestCase<Application> {
-    private ExpenseManager expenseManager;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
-    public ApplicationTest() {
-        super(Application.class);
-    }
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        expenseManager = new PersistentExpenseManager(mContext);
+public class ApplicationTest {
+    private static ExpenseManager expenseManager;
+
+    @BeforeClass
+    public static void setUp() {
+        Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        assertEquals("lk.ac.mrt.cse.dbs.simpleexpensemanager", context.getPackageName());
+        expenseManager = new PersistentExpenseManager(context);
     }
 
     @Test
