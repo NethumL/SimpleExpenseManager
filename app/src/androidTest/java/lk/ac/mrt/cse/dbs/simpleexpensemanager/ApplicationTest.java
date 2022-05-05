@@ -23,6 +23,8 @@ import org.junit.Test;
 
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.control.ExpenseManager;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.control.PersistentExpenseManager;
+import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.exception.InvalidAccountException;
+import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.ExpenseType;
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
@@ -45,5 +47,16 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         assertEquals(2, expenseManager.getAccountNumbersList().size());
         expenseManager.addAccount("123", "ABC Bank", "John", 5.5);
         assertEquals(3, expenseManager.getAccountNumbersList().size());
+    }
+
+    @Test
+    public void testAddTransaction() {
+        assertEquals(0, expenseManager.getTransactionLogs().size());
+        try {
+            expenseManager.updateAccountBalance("12345A", 1, 1, 2022, ExpenseType.EXPENSE, "100.0");
+        } catch (InvalidAccountException e) {
+            fail();
+        }
+        assertEquals(1, expenseManager.getTransactionLogs().size());
     }
 }
