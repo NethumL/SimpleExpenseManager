@@ -23,17 +23,21 @@ import androidx.test.core.app.ApplicationProvider;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.List;
+
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.control.ExpenseManager;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.control.PersistentExpenseManager;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.exception.InvalidAccountException;
+import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.Account;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.ExpenseType;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
 
 public class ApplicationTest {
     private static ExpenseManager expenseManager;
+    private static final Account testAccount = new Account("123", "ABC Bank", "John", 5.5);
 
     @BeforeClass
     public static void setUp() {
@@ -45,8 +49,10 @@ public class ApplicationTest {
     @Test
     public void testAddAccount() {
         assertEquals(2, expenseManager.getAccountNumbersList().size());
-        expenseManager.addAccount("123", "ABC Bank", "John", 5.5);
-        assertEquals(3, expenseManager.getAccountNumbersList().size());
+        expenseManager.addAccount(testAccount.getAccountNo(), testAccount.getBankName(),
+                testAccount.getAccountHolderName(), testAccount.getBalance());
+        List<String> accountNumbers = expenseManager.getAccountNumbersList();
+        assertTrue(accountNumbers.contains("123"));
     }
 
     @Test
