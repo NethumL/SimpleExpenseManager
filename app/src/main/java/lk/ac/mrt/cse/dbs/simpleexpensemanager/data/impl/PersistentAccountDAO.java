@@ -63,7 +63,7 @@ public class PersistentAccountDAO implements AccountDAO {
         Cursor cursor = db.query(DBContract.Account.TABLE_NAME, null,
                 DBContract.Account.COLUMN_NAME_ACCOUNT_NO + " = ?",
                 new String[]{accountNo}, null, null, null);
-        while (cursor.moveToNext()) {
+        if (cursor.moveToNext()) {
             String accountNumber = cursor.getString(
                     cursor.getColumnIndexOrThrow(DBContract.Account.COLUMN_NAME_ACCOUNT_NO));
             String bankName = cursor.getString(
